@@ -12,20 +12,22 @@ const store = new Vuex.Store({
 		currentId: STORED_BILL ? Object.keys(STORED_BILL).length : 0,
 	},
 	getters: {
-		billIds: state => Object.keys(state.bills),
-    getBillById: state => billId => state.bills[billId],
-    customers: state => {
-      const customerMap = Object.values(state.bills).flat()
-        .reduce((acc, cur) => ({
-          ...acc,
-          [cur.customer]: acc[cur.customer] ? acc[cur.customer] + cur.price : cur.price
-        }), {});
+		billIds: state => Object.keys(state.bills).reverse(),
+		getBillById: state => billId => state.bills[billId],
+		sum: state => Object.values(state.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
+		customers: state => {
+			const customerMap = Object.values(state.bills).flat()
+				.reduce((acc, cur) => ({
+				...acc,
+				[cur.customer]: acc[cur.customer] ? 
+					{ price: acc[cur.customer].price + cur.price, amount: ++acc[cur.customer].amount } : 
+					{ price: cur.price, amount: 1 }
+				}), {});
 
-      return Object.keys(customerMap)
-        .map(customer => ({id: customer, price: customerMap[customer]}))
-        .sort((a, b) => a.id > b.id);
-    },
-    sum: state => Object.values(state.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
+			return Object.keys(customerMap)
+				.map(customer => ({id: customer, price: customerMap[customer].price, amount: customerMap[customer].amount }))
+				.sort((a, b) => a.id > b.id);
+		},
 	},
 	mutations: {
 		addBill(state) {
@@ -45,6 +47,9 @@ const store = new Vuex.Store({
 				...state.bills,
 				[billId]: state.bills[billId].filter((el, i) => i !== entryId),
 			};
+		},
+		deleteBill(state, { billId }) {
+      Vue.delete(state.bills, billId);
 		},
 	},
 	actions: {},

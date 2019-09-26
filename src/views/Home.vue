@@ -1,13 +1,21 @@
 <template>
-  <div class="home">
-    <div class="add">
-      <button @click="addBill">Add new Bill</button>
-    </div>
-    <div class="bills">
-      <Bill v-for="(id, index) in $store.getters.billIds" :key="index" :id="id" />
-    </div>
-    <Customers />
-  </div>
+  <v-container class="home">
+    <v-row>
+      <v-col cols="8" md="6">
+        <div class="bills">
+          <Bill v-for="(id, index) in $store.getters.billIds" :key="index" :id="id" 
+            @finish="addBill" :highlighted="index === 0"/>
+        </div>
+        <v-btn center @click="addBill">
+          <v-icon left>mdi-basket</v-icon>
+          <span class="mr-2">Neue Rechnung</span>
+        </v-btn>
+      </v-col>
+      <v-col cols="4" md="6">
+        <Customers />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -22,12 +30,13 @@ export default {
     Customers
   },
   mounted() {
-    // this.$store.commit('addBill');
+    if(!this.$store.getters.billIds.length) {
+      this.addBill();
+    }
   },
   methods: {
     addBill() {
       this.$store.commit('addBill');
-      const id = this.$store.state.currentId;
     }
   }
 };
