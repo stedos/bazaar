@@ -49,15 +49,13 @@ const store = new Vuex.Store({
 			state.selected = bazaarId;
 		},
 		deleteBazaar(state, bazaarId) {
-			console.log('delete', bazaarId);
-			
 			Vue.delete(state.bazaars, bazaarId);
 	 	},
 
 		// Bills
 		addBill(state, bazaarId) {
 			const bazaar = state.bazaars[bazaarId || state.selected];
-
+			// date: new Date().toLocaleString('de') // TODO date could be added to bill
 			bazaar.bills = {
 				...bazaar.bills,
 				[++bazaar.lastBillId]: [],

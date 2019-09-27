@@ -1,9 +1,13 @@
 
 # Open Todos:
-	☐ Bazaar-ID Anzeigen zum Abgleich (Pro application ?!?)
-	☐ Create multiple Bazaars
+	☐ merge two basars
+
+Usability:
+	☐ create basar on enter close window and create
 	☐ Autofocus on Kundennr. bei Fokus auf Feld
 	☐ Bei Tab nur zwischen beiden Feldern hin und her switchen
-	☐ Clean up Print
+	
+Later:
 	☐ Collapse Bills
+	☐ Clean up Print
 	☐ Adapt Colors
