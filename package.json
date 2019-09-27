@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "git checkout master && git pull && git merge develop master && rm -rf docs && npm run build && mv dist docs && git add docs && git commit -m\"deploy\" && git push && git checkout -"
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
