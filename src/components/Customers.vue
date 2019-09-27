@@ -1,10 +1,15 @@
 <template>
-  <v-card outlined raised class="customers">
-    <h2>Abrechnung</h2>
+  <v-card outlined raised class="customers" id="invoice">
+    <div class="chart-naming">
+      <h2>Abrechnung</h2>
+      <span>
+        <v-icon @click.stop="$htmlToPaper('invoice')">mdi-printer</v-icon>
+      </span>
+    </div>
     <v-simple-table>
       <thead>
         <tr>
-          <th>Kunde</th>
+          <th>Kundenr.</th>
           <th>Artikel</th>
           <th>Brutto</th>
           <th>Abzug {{reverseTax * 100}}%</th>

@@ -49,7 +49,15 @@ const store = new Vuex.Store({
 			};
 		},
 		deleteBill(state, { billId }) {
-      Vue.delete(state.bills, billId);
+      		Vue.delete(state.bills, billId);
+		},
+		addBills(state, {id, bills}) {
+			const newBills = Object.keys(bills).reduce((acc, cur) => ({
+				...acc,
+				[`${cur} (${id})`]: bills[cur]
+			}), {});
+
+			state.bills = { ...newBills, ...state.bills };
 		},
 	},
 	actions: {},

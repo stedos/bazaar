@@ -1,20 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Bazaar</span>
-        <span class="font-weight-light">V1</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn @click="$store.commit('addBill')">
-        <v-icon left>mdi-basket</v-icon>
-        <span class="mr-2">Neue Rechnung</span>
-      </v-btn>
-      <v-btn text href="#">
-        <span class="mr-2">Download</span>
-        <v-icon>mdi-download</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <Header />
 
     <v-content>
       <router-view/>
@@ -23,9 +9,13 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue";
 
 export default {
   name: 'App',
+  components: {
+    Header
+  },
   data: () => ({
     //
   }),
@@ -33,3 +23,18 @@ export default {
   }
 };
 </script>
+
+<style lang="less">
+i {
+  cursor: pointer;
+}
+.chart-naming {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    i {
+      margin-left: 16px;
+    }
+  }
+</style>
