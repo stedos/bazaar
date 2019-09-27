@@ -1,13 +1,9 @@
 <template>
-  <div class="impex">
+  <div class="import">
     <input ref="upload" type="file" @change="loadTextFromFile" class="upload" accept="application/json">
     <v-btn text @click="$refs.upload.click()">
-      <span v-if="!hideText" class="mr-2">Importieren</span>
-      <v-icon>mdi-upload</v-icon>
-    </v-btn>
-    <v-btn text :href="href" :download="`Rechnung-${invoiceId}.json`">
-      <span v-if="!hideText" class="mr-2">Download</span>
-      <v-icon>mdi-download</v-icon>
+      <span v-if="showText" class="mr-2 d-none d-sm-flex">Importieren</span>
+      <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-upload</v-icon>
     </v-btn>
 
     <v-dialog v-model="dialog.show" max-width="370">
@@ -18,7 +14,7 @@
           <template v-else>&nbsp;erfolgreich</template>
         </v-card-title>
         <v-card-text v-if="dialog.error">Leider ist ein Fehler aufgetreten. Bitte laden Sie die Datei erneut herunter und versuchen Sie diese einzufügen.</v-card-text>
-        <v-card-text v-else>Rechnungen wurden erfolgreich mit der ID {{ dialog.id }} importiert.</v-card-text>
+        <v-card-text v-else>Rechnungen '{{ dialog.name }}' wurden erfolgreich mit der ID {{ dialog.id }} importiert.</v-card-text>
         <v-card-actions>
           <div class="flex-grow-1"></div>
           <v-btn text @click="closeDialog()">Okay!</v-btn>
@@ -35,24 +31,17 @@ const dialogDefault = () => ({
   show: false,
   error: false,
   id: 0,
+  name: '',
 });
 
 export default {
-  name: 'ImportExport',
+  name: 'Import',
   props: {
-    hideText: Boolean,
+    showText: Boolean,
   },
   data: () => ({
-    invoiceId: Math.floor(Math.random() * Math.pow(10, 6)),
     dialog: dialogDefault(),
   }),
-  computed: {
-    href() {
-      const content = JSON.stringify({id: this.invoiceId, bills: this.$store.state.bills});
-      const file = new Blob([content], { type: "application/json" });
-      return URL.createObjectURL(file);
-    }
-  },
   methods: {
     loadTextFromFile(ev) {
       this.dialog.show = true;
@@ -62,12 +51,24 @@ export default {
 
       reader.onload = e => {
         try {
-          const content = JSON.parse(e.target.result);
-          this.dialog.id = content.id;
-          this.$store.commit('addBills', content);
+          const bazaar = JSON.parse(e.target.result);
+          const originalId = bazaar.id;
+          let count = 1;
+          
+          while(this.$store.getters.hasBazaar(bazaar.id)) {
+            bazaar.id = `${originalId} (${count++})`;
+          }
+          
+          this.dialog.id = bazaar.id;
+          this.dialog.name = bazaar.name;
+          this.$store.commit('createBazaar', bazaar);
+
         } catch (error) {
+          console.log('error', error);
           this.dialog.error = true;
         }
+
+        this.$refs.upload.value = '';
       };
 
       reader.readAsText(file);
@@ -80,7 +81,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.impex {
+.import {
   position: relative;
 }
 .upload {

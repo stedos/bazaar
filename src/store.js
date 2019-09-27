@@ -14,6 +14,7 @@ const store = new Vuex.Store({
 	getters: {
 		// common
 		bazaar: state => state.bazaars[state.selected] || { bills: {} },
+		hasBazaar: state => bazaarId => !!state.bazaars[bazaarId],
 		
 		// all bazaars
 		bazaarsAsList: state => Object.values(state.bazaars),
@@ -38,16 +39,18 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		// Bazaar
-		createBazaar(state, {id, name, date}) {
+		createBazaar(state, {id, name, date, bills={} }) {
 			state.bazaars = {
 				...state.bazaars,
-				[id]: { id, name, date, lastBillId: 0, bills: {} },
+				[id]: { id, name, date, lastBillId: 0, bills: bills },
 			};
 		},
-		selectBazaar(state, id) {
-			state.selected = id;
+		selectBazaar(state, bazaarId) {
+			state.selected = bazaarId;
 		},
-		deleteBazaar(state, { bazaarId }) {
+		deleteBazaar(state, bazaarId) {
+			console.log('delete', bazaarId);
+			
 			Vue.delete(state.bazaars, bazaarId);
 	 	},
 

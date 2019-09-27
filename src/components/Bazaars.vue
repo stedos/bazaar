@@ -16,8 +16,8 @@
           <td>{{ bazaar.date }}</td>
           <td>{{ bazaar.id }}</td>
           <td>
-            <!-- <ImportExport :hideText="false" />
-            <v-icon @click="deleteEntry(bazaar.id)">mdi-delete</v-icon> -->
+            <Export :id="bazaar.id" />
+            <Delete :headline="`Basar '${bazaar.name}' [ID: ${bazaar.id}] wirklich löschen?`" @delete="deleteEntry(bazaar.id)" />
           </td>
         </tr>
       </tbody>
@@ -26,12 +26,14 @@
 </template>
 
 <script>
-import ImportExport from "@/components/ImportExport.vue";
+import Export from "@/components/Export.vue";
+import Delete from "@/components/Delete.vue";
 
 export default {
   name: "Bazaars",
   components: {
-    ImportExport
+    Delete,
+    Export,
   },
   props: {
   },
@@ -43,7 +45,7 @@ export default {
   },
   methods: {
     deleteEntry(id) {
-      // this.$store.commit('deleteBazaar', id);
+      this.$store.commit('deleteBazaar', id);
     }
   }
 };
@@ -51,4 +53,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+tbody tr {
+  cursor: pointer;
+}
 </style>

@@ -8,11 +8,10 @@
     <div class="chart-naming">
       <h3>Rechnung {{ id }}</h3>
       <span>
-        <v-icon @click.stop="deleteDialog = true">mdi-delete</v-icon>
+        <Delete :headline="`Rechnung '${id}' wirklich löschen?`" @delete="deleteBill" />
         <v-icon @click.stop="print">mdi-printer</v-icon>
       </span>
     </div>
-    <DeleteDialog v-model="deleteDialog" :id="id" @delete="deleteBill" />
     <v-simple-table>
       <thead>
         <tr>
@@ -48,7 +47,7 @@
 </template>
 
 <script>
-import DeleteDialog from "@/components/DeleteDialog.vue";
+import Delete from "@/components/Delete.vue";
 
 const cleanData = () => ({
   customer: "",
@@ -58,7 +57,7 @@ const cleanData = () => ({
 export default {
   name: "Bill",
   components: {
-    DeleteDialog
+    Delete
   },
   props: {
     id: String,
@@ -68,7 +67,6 @@ export default {
     return {
       current: cleanData(),
       focused: false,
-      deleteDialog: false,
       showInfo: true,
     }
   },
@@ -124,6 +122,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .bill {
+  margin-bottom: 40px;
+
   &__info {
     font-size: 12px;
   }

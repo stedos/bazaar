@@ -33,15 +33,10 @@ i {
 // }
 .v-card {
   padding: 20px;
-  margin-bottom: 40px;
 }
 .chart-naming {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  i {
-    margin-left: 16px;
-  }
 }
 </style>

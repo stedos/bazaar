@@ -5,21 +5,32 @@
         <span class="font-weight-light">V1</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="$store.commit('addBill')">
-        <v-icon left>mdi-basket</v-icon>
-        <span class="mr-2">Neue Rechnung</span>
-      </v-btn>
-      <ImportExport />
+      <!-- bill selected -->
+      <template v-if="$store.state.selected">
+        <Export :id="$store.state.selected" :showText="true"/>
+        <CreateBill />
+      </template>
+      <!-- bill not selected -->
+      <template v-else>
+        <Import :showText="true"/>
+        <CreateBazaar />
+      </template>
     </v-app-bar>
 </template>
 
 <script>
-import ImportExport from "@/components/ImportExport.vue";
+import Import from "@/components/Import.vue";
+import Export from "@/components/Export.vue";
+import CreateBazaar from "@/components/CreateBazaar.vue";
+import CreateBill from "@/components/CreateBill.vue";
 
 export default {
   name: 'Header',
   components: {
-    ImportExport
+    Import,
+    Export,
+    CreateBazaar,
+    CreateBill,
   },
   data: () => ({
   }),
