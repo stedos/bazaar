@@ -4,27 +4,26 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 const STORAGE_BAZAARS = 'bazaars';
-const STORAGE_BILL = 'bills';
-const STORED_BILL = JSON.parse(localStorage.getItem(STORAGE_BILL));
 const STORED_BAZAARS = JSON.parse(localStorage.getItem(STORAGE_BAZAARS));
 
 const store = new Vuex.Store({
 	state: {
 		bazaars: STORED_BAZAARS || {},
-
-		bills: STORED_BILL || {},
-		currentId: STORED_BILL ? Object.keys(STORED_BILL).length : 0,
+		selected: null,
 	},
 	getters: {
+		// common
+		bazaar: state => state.bazaars[state.selected] || { bills: {} },
+		
 		// all bazaars
 		bazaarsAsList: state => Object.values(state.bazaars),
 
 		// bills (single bazaar)
-		billIds: state => Object.keys(state.bills).reverse(),
-		getBillById: state => billId => state.bills[billId],
-		sum: state => Object.values(state.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
-		customers: state => {
-			const customerMap = Object.values(state.bills).flat()
+		billIds: (_, getters) => Object.keys(getters.bazaar.bills).reverse(),
+		getBillById: (_, getters) => billId => getters.bazaar.bills[billId],
+		sum: (_, getters) => Object.values(getters.bazaar.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
+		customers: (_, getters) => {
+			const customerMap = Object.values(getters.bazaar.bills).flat()
 				.reduce((acc, cur) => ({
 				...acc,
 				[cur.customer]: acc[cur.customer] ? 
@@ -38,48 +37,75 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
+		// Bazaar
 		createBazaar(state, {id, name, date}) {
 			state.bazaars = {
 				...state.bazaars,
-				[id]: { id, name, date, bills: {}},
+				[id]: { id, name, date, lastBillId: 0, bills: {} },
 			};
 		},
+		selectBazaar(state, id) {
+			state.selected = id;
+		},
+		deleteBazaar(state, { bazaarId }) {
+			Vue.delete(state.bazaars, bazaarId);
+	 	},
 
-		addBill(state) {
-			state.bills = {
-				...state.bills,
-				[++state.currentId]: [],
+		// Bills
+		addBill(state, bazaarId) {
+			const bazaar = state.bazaars[bazaarId || state.selected];
+
+			bazaar.bills = {
+				...bazaar.bills,
+				[++bazaar.lastBillId]: [],
 			};
-		},
-		addEntryToBill(state, { billId, customer, price }) {
-			state.bills = {
-				...state.bills,
-				[billId]: [...state.bills[billId], { customer, price }],
-			};
-		},
-		deleteEntryFromBill(state, { billId, entryId }) {
-			state.bills = {
-				...state.bills,
-				[billId]: state.bills[billId].filter((el, i) => i !== entryId),
-			};
-		},
-		deleteBill(state, { billId }) {
-      		Vue.delete(state.bills, billId);
+
+			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
 		},
 		addBills(state, {id, bills}) {
+			const bazaar = state.bazaars[state.selected];
+
 			const newBills = Object.keys(bills).reduce((acc, cur) => ({
 				...acc,
 				[`${cur} (${id})`]: bills[cur]
 			}), {});
 
-			state.bills = { ...newBills, ...state.bills };
+			bazaar.bills = { ...newBills, ...bazaar.bills };
+
+			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
+		},
+		addEntryToBill(state, { billId, customer, price }) {
+			const bazaar = state.bazaars[state.selected];
+
+			bazaar.bills = {
+				...bazaar.bills,
+				[billId]: [...bazaar.bills[billId], { customer, price }],
+			};
+
+			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
+		},
+		deleteEntryFromBill(state, { billId, entryId }) {
+			const bazaar = state.bazaars[state.selected];
+
+			bazaar.bills = {
+				...bazaar.bills,
+				[billId]: bazaar.bills[billId].filter((el, i) => i !== entryId),
+			};
+
+			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
+		},
+		deleteBill(state, { billId }) {
+			const bazaar = state.bazaars[state.selected];
+
+			delete bazaar.bills[billId];
+
+			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
 		},
 	},
 	actions: {},
 });
 
 // save store automatically in storage
-store.watch(state => state.bills, bills => localStorage.setItem(STORAGE_BILL, JSON.stringify(bills)));
 store.watch(state => state.bazaars, bazaars => localStorage.setItem(STORAGE_BAZAARS, JSON.stringify(bazaars)));
 
 export default store;

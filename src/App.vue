@@ -28,13 +28,20 @@ export default {
 i {
   cursor: pointer;
 }
+// a, a:visited, a:hover, a:active {
+//   text-decoration: none;
+// }
+.v-card {
+  padding: 20px;
+  margin-bottom: 40px;
+}
 .chart-naming {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-    i {
-      margin-left: 16px;
-    }
+  i {
+    margin-left: 16px;
   }
+}
 </style>

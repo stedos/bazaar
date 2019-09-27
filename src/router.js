@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Bills from "./views/Bills.vue";
+import Bazaar from "./views/Bazaar.vue";
 
 Vue.use(Router);
 
@@ -15,7 +15,7 @@ export default new Router({
     {
       path: "/bazaar/:id",
       name: "Bazaar",
-      component: Bills
+      component: Bazaar
     },
     {
       path: "/about",

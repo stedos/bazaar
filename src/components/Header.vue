@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
+      <v-toolbar-title class="headline text-uppercase" @click="$router.push('/').catch(err => {})">
         <span>Bazaar</span>
         <span class="font-weight-light">V1</span>
       </v-toolbar-title>
@@ -29,3 +29,9 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+.headline {
+  cursor: pointer;
+}
+</style>

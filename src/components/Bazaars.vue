@@ -11,14 +11,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="bazaar in $store.getters.bazaarsAsList" :key="bazaar.id" @click.stop="$router.push(`/bazaar/:${bazaar.id}`)">
+        <tr v-for="bazaar in $store.getters.bazaarsAsList" :key="bazaar.id" @click.stop="$router.push(`/bazaar/${bazaar.id}`)">
           <td>{{ bazaar.name }}</td>
           <td>{{ bazaar.date }}</td>
           <td>{{ bazaar.id }}</td>
-          <!-- <td @click="deleteEntry(bazaar.id)">
-            <ImportExport :hideText="false" />
-            <v-icon>mdi-delete</v-icon>
-          </td> -->
+          <td>
+            <!-- <ImportExport :hideText="false" />
+            <v-icon @click="deleteEntry(bazaar.id)">mdi-delete</v-icon> -->
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
