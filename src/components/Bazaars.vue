@@ -16,6 +16,7 @@
           <td>{{ bazaar.date }}</td>
           <td>{{ bazaar.id }}</td>
           <td>
+            <Merge :preselection="bazaar.id" />
             <Export :id="bazaar.id" />
             <Delete :headline="`Basar '${bazaar.name}' [ID: ${bazaar.id}] wirklich löschen?`" @delete="deleteEntry(bazaar.id)" />
           </td>
@@ -28,12 +29,14 @@
 <script>
 import Export from "@/components/Export.vue";
 import Delete from "@/components/Delete.vue";
+import Merge from "@/components/Merge.vue";
 
 export default {
   name: "Bazaars",
   components: {
     Delete,
     Export,
+    Merge,
   },
   props: {
   },

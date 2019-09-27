@@ -1,9 +1,8 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" v-on="on">
-        <span class="d-none d-sm-flex">Neuen Basar erstellen</span>
-        <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-shopping</v-icon>
+      <v-btn text v-on="on" @click.stop>
+        <v-icon>mdi-merge</v-icon>
       </v-btn>
     </template>
     <v-card>
@@ -14,13 +13,23 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12" md="12">
-              <v-text-field label="Name" required v-model="bazaar.name" ref="name"></v-text-field>
+              <v-text-field label="Name" required v-model="name" ref="name"></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="6">
-              <v-text-field label="ID" disabled v-model="bazaar.id"></v-text-field>
+            <v-col cols="12">
+              <v-select
+                v-model="selected1"
+                :items="bazaars"
+                menu-props="auto"
+                label="Basar 1"
+              ></v-select>
             </v-col>
-            <v-col cols="12" sm="6" md="6">
-              <v-text-field label="Date" disabled v-model="bazaar.date"></v-text-field>
+            <v-col cols="12">
+              <v-select
+                v-model="selected2"
+                :items="bazaars"
+                menu-props="auto"
+                label="Basar 2"
+              ></v-select>
             </v-col>
           </v-row>
         </v-container>
@@ -42,26 +51,38 @@ const bazarData = () => ({
 });
 
 export default {
-  name: "CreateBazaar",
+  name: "Merge",
   props: {
+    preselection: String,
   },
   data() {
     return {
       dialog: false,
-      bazaar: bazarData(),
+      bazaars: [],
+      name: '',
+      selected1: null,
+      selected2: null,
     }
   },
   watch: {
     dialog() {
       if(this.dialog) {
-        this.bazaar = bazarData();
+        this.selected1 = this.preselection;
+        this.bazaars = this.$store.getters.bazaarsAsList.map(b => ({
+          text: `${b.name} - ${b.date} (${b.id})`,
+          value: b.id,
+        }));
         setTimeout(() => this.$refs.name.focus(), 250);
       }
     }
   },
   methods: {
     create() {
-      this.$store.commit('createBazaar', this.bazaar);
+      this.$store.dispatch('merge', {
+        name: this.name,
+        bazaars: [this.selected1, this.selected2]
+      });
+      
       this.dialog = false;
     },
   }

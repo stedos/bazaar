@@ -39,10 +39,10 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		// Bazaar
-		createBazaar(state, {id, name, date, bills={} }) {
+		createBazaar(state, {id, name, date, lastBillId=0, bills={} }) {
 			state.bazaars = {
 				...state.bazaars,
-				[id]: { id, name, date, lastBillId: 0, bills: bills },
+				[id]: { id, name, date, lastBillId, bills },
 			};
 		},
 		selectBazaar(state, bazaarId) {
@@ -60,18 +60,6 @@ const store = new Vuex.Store({
 				...bazaar.bills,
 				[++bazaar.lastBillId]: [],
 			};
-
-			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
-		},
-		addBills(state, {id, bills}) {
-			const bazaar = state.bazaars[state.selected];
-
-			const newBills = Object.keys(bills).reduce((acc, cur) => ({
-				...acc,
-				[`${cur} (${id})`]: bills[cur]
-			}), {});
-
-			bazaar.bills = { ...newBills, ...bazaar.bills };
 
 			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
 		},
@@ -102,8 +90,35 @@ const store = new Vuex.Store({
 
 			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
 		},
+
+		addBillsToBazaar(state, {id, bills, idAddon}) {
+			const bazaar = state.bazaars[id];
+
+			const newBills = Object.keys(bills).reduce((acc, cur) => ({
+				...acc,
+				[`${cur} (${idAddon})`]: bills[cur]
+			}), {});
+
+			bazaar.bills = { ...newBills, ...bazaar.bills };
+
+			state.bazaars = { ...state.bazaars, [id]: bazaar}
+		},
 	},
-	actions: {},
+	actions: {
+		merge({state, commit}, {name, bazaars}) {
+			const id = '' + Math.floor(Math.random() * Math.pow(10, 6));
+
+			commit('createBazaar', { name, id, date: new Date().toUTCString() });
+
+			bazaars.forEach(bazaarId => {
+				commit('addBillsToBazaar', {
+					id, 
+					idAddon: bazaarId,
+					bills: state.bazaars[bazaarId].bills
+				});
+			});
+		}
+	},
 });
 
 // save store automatically in storage
