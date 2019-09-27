@@ -14,7 +14,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12" md="12">
-              <v-text-field label="Name" required v-model="bazaar.name" ref="name"></v-text-field>
+              <v-text-field label="Name" required v-model="bazaar.name" ref="name" @keyup.enter="create"></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="6">
               <v-text-field label="ID" disabled v-model="bazaar.id"></v-text-field>
@@ -63,6 +63,7 @@ export default {
     create() {
       this.$store.commit('createBazaar', this.bazaar);
       this.dialog = false;
+      this.$router.push(`/bazaar/${this.bazaar.id}`);
     },
   }
 
