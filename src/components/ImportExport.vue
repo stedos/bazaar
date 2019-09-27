@@ -2,11 +2,11 @@
   <div class="impex">
     <input ref="upload" type="file" @change="loadTextFromFile" class="upload" accept="application/json">
     <v-btn text @click="$refs.upload.click()">
-      <span class="mr-2">Importieren</span>
+      <span v-if="!hideText" class="mr-2">Importieren</span>
       <v-icon>mdi-upload</v-icon>
     </v-btn>
     <v-btn text :href="href" :download="`Rechnung-${invoiceId}.json`">
-      <span class="mr-2">Download</span>
+      <span v-if="!hideText" class="mr-2">Download</span>
       <v-icon>mdi-download</v-icon>
     </v-btn>
 
@@ -39,6 +39,9 @@ const dialogDefault = () => ({
 
 export default {
   name: 'ImportExport',
+  props: {
+    hideText: Boolean,
+  },
   data: () => ({
     invoiceId: Math.floor(Math.random() * Math.pow(10, 6)),
     dialog: dialogDefault(),

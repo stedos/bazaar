@@ -3,15 +3,23 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const STORAGE_NAME = 'bills';
-const STORED_BILL = JSON.parse(localStorage.getItem(STORAGE_NAME));
+const STORAGE_BAZAARS = 'bazaars';
+const STORAGE_BILL = 'bills';
+const STORED_BILL = JSON.parse(localStorage.getItem(STORAGE_BILL));
+const STORED_BAZAARS = JSON.parse(localStorage.getItem(STORAGE_BAZAARS));
 
 const store = new Vuex.Store({
 	state: {
+		bazaars: STORED_BAZAARS || {},
+
 		bills: STORED_BILL || {},
 		currentId: STORED_BILL ? Object.keys(STORED_BILL).length : 0,
 	},
 	getters: {
+		// all bazaars
+		bazaarsAsList: state => Object.values(state.bazaars),
+
+		// bills (single bazaar)
 		billIds: state => Object.keys(state.bills).reverse(),
 		getBillById: state => billId => state.bills[billId],
 		sum: state => Object.values(state.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
@@ -30,6 +38,13 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
+		createBazaar(state, {id, name, date}) {
+			state.bazaars = {
+				...state.bazaars,
+				[id]: { id, name, date, bills: {}},
+			};
+		},
+
 		addBill(state) {
 			state.bills = {
 				...state.bills,
@@ -64,6 +79,7 @@ const store = new Vuex.Store({
 });
 
 // save store automatically in storage
-store.watch(state => state.bills, bills => localStorage.setItem(STORAGE_NAME, JSON.stringify(bills)));
+store.watch(state => state.bills, bills => localStorage.setItem(STORAGE_BILL, JSON.stringify(bills)));
+store.watch(state => state.bazaars, bazaars => localStorage.setItem(STORAGE_BAZAARS, JSON.stringify(bazaars)));
 
 export default store;

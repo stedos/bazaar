@@ -34,9 +34,9 @@
       </tr>
 
       <tr>
-        <td><v-text-field name="customer" label="Kunde" v-model="current.customer" ref="customer" @keyup.enter="$refs.price.focus()" /></td>
+        <td><v-text-field name="customer" label="Kundenr." v-model="current.customer" ref="customer" @keyup.enter="$refs.price.focus()" /></td>
         <td><v-text-field name="price" label="Preis" type="number" v-model.number="current.price" ref="price" @keyup.enter="addEntry" /></td>
-        <td @click="showInfo = !showInfo"><v-icon>mdi-information</v-icon></td>
+        <td><v-icon v-show="highlighted" @click="showInfo = !showInfo">mdi-information</v-icon></td>
       </tr>
       </tbody>
     </v-simple-table>
