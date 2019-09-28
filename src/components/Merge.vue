@@ -1,8 +1,13 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn text v-on="on" @click.stop>
-        <v-icon>mdi-merge</v-icon>
+      <v-btn icon v-on="on" @click.stop>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">mdi-merge</v-icon>
+          </template>
+          <span>Zusammenführen</span>
+        </v-tooltip>
       </v-btn>
     </template>
     <v-card>

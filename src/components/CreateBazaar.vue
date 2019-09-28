@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" v-on="on">
+      <v-btn color="teal" v-on="on">
         <span class="d-none d-sm-flex">Neuen Basar erstellen</span>
         <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-shopping</v-icon>
       </v-btn>
