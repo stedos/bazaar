@@ -12,7 +12,7 @@
         </v-tooltip>
     </v-btn>
 
-    <v-dialog v-model="dialog.show" max-width="370">
+    <v-dialog v-model="dialog.show" max-width="600">
       <v-card>
         <v-card-title class="headline">
           Importieren

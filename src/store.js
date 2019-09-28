@@ -118,21 +118,21 @@ const store = new Vuex.Store({
 		},
 	},
 	actions: {
-		create({commit}, { name }) {
+		create({commit}, name) {
 			const bazaar = { ...bazaarData, name };
 			
 			commit('createBazaar', bazaar);
 
 			return bazaar;
 		},
-		merge({state, dispath, commit}, {name, bazaars}) {
-			const bazaar = dispath('create', name);
-
-			bazaars.forEach(bazaarId => {
-				commit('addBillsToBazaar', {
-					id: bazaar.id, 
-					idAddon: bazaarId,
-					bills: state.bazaars[bazaarId].bills
+		merge({state, dispatch, commit}, {name, bazaars}) {
+			dispatch('create', name).then(bazaar => {
+				bazaars.forEach(bazaarId => {
+					commit('addBillsToBazaar', {
+						id: bazaar.id, 
+						idAddon: bazaarId,
+						bills: state.bazaars[bazaarId].bills
+					});
 				});
 			});
 		}
