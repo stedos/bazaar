@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from 'vuex-persist';
 import localforage from 'localforage';
+import { bazaarData } from '@/utils/utils.js';
 
 Vue.use(Vuex);
 
@@ -44,18 +45,25 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		// Bazaar
-		createBazaar(state, {id, name, date, lastBillId=0, bills={} }) {
+		createBazaar(state, bazaar) {
 			state.bazaars = {
 				...state.bazaars,
-				[id]: { id, name, date, lastBillId, bills },
+				[bazaar.id]: bazaar,
 			};
+		},
+		editBazaar(state, { bazaarId, name }) {
+			const bazaar = state.bazaars[bazaarId];
+			
+			bazaar.name = name;
+
+			state.bazaars = { ...state.bazaars, [bazaarId]: bazaar};
+		},
+		deleteBazaar(state, bazaarId) {
+			Vue.delete(state.bazaars, bazaarId);
 		},
 		selectBazaar(state, bazaarId) {
 			state.selected = bazaarId;
 		},
-		deleteBazaar(state, bazaarId) {
-			Vue.delete(state.bazaars, bazaarId);
-	 	},
 
 		// Bills
 		addBill(state, bazaarId) {
@@ -66,7 +74,7 @@ const store = new Vuex.Store({
 				[++bazaar.lastBillId]: [],
 			};
 
-			state.bazaars = { ...state.bazaars, [state.selected]: bazaar}
+			state.bazaars = { ...state.bazaars, [bazaarId || state.selected]: bazaar}
 		},
 		addEntryToBill(state, { billId, customer, price }) {
 			const bazaar = state.bazaars[state.selected];
@@ -110,14 +118,19 @@ const store = new Vuex.Store({
 		},
 	},
 	actions: {
-		merge({state, commit}, {name, bazaars}) {
-			const id = '' + Math.floor(Math.random() * Math.pow(10, 6));
+		create({commit}, { name }) {
+			const bazaar = { ...bazaarData, name };
+			
+			commit('createBazaar', bazaar);
 
-			commit('createBazaar', { name, id, date: new Date().toUTCString('de') });
+			return bazaar;
+		},
+		merge({state, dispath, commit}, {name, bazaars}) {
+			const bazaar = dispath('create', name);
 
 			bazaars.forEach(bazaarId => {
 				commit('addBillsToBazaar', {
-					id, 
+					id: bazaar.id, 
 					idAddon: bazaarId,
 					bills: state.bazaars[bazaarId].bills
 				});
