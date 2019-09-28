@@ -44,6 +44,8 @@ export default {
     return {
     }
   },
+  mounted() {
+  },
   computed: {
   },
   methods: {
@@ -58,5 +60,8 @@ export default {
 <style scoped lang="less">
 tbody tr {
   cursor: pointer;
+  &:hover > td {
+    background: teal;
+  }
 }
 </style>

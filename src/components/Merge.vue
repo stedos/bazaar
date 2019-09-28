@@ -49,12 +49,6 @@
 </template>
 
 <script>
-const bazarData = () => ({
-  id: '' + Math.floor(Math.random() * Math.pow(10, 6)),
-  date: new Date().toUTCString(),
-  name: "",
-});
-
 export default {
   name: "Merge",
   props: {

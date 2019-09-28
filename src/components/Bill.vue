@@ -7,7 +7,6 @@
 		@click="$refs.customer.focus()"
 		:style="highlighted || focused ? '' : 'opacity: 0.5;'"
 	>
-		<!-- TODO highlighted weiter behandeln -->
 		<div class="chart-naming">
 			<h3>Rechnung {{ id }}</h3>
 			<span>

@@ -17,7 +17,7 @@ const store = new Vuex.Store({
 		hasBazaar: state => bazaarId => !!state.bazaars[bazaarId],
 		
 		// all bazaars
-		bazaarsAsList: state => Object.values(state.bazaars),
+		bazaarsAsList: state => Object.values(state.bazaars).sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
 
 		// bills (single bazaar)
 		billIds: (_, getters) => Object.keys(getters.bazaar.bills).reverse(),
@@ -108,7 +108,7 @@ const store = new Vuex.Store({
 		merge({state, commit}, {name, bazaars}) {
 			const id = '' + Math.floor(Math.random() * Math.pow(10, 6));
 
-			commit('createBazaar', { name, id, date: new Date().toUTCString() });
+			commit('createBazaar', { name, id, date: new Date().toUTCString('de') });
 
 			bazaars.forEach(bazaarId => {
 				commit('addBillsToBazaar', {

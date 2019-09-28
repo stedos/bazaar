@@ -1,25 +1,23 @@
 <template>
 	<v-container v-if="$store.state.selected">
 		<v-row>
-			<v-col cols="12" xs="8">
+			<v-col cols="8">
 				<h1>{{ bazaar.name }}</h1>
 			</v-col>
-			<v-col cols="12" md="4" class="name-info">
+			<v-col cols="4" class="name-info">
 				<h4>{{ bazaar.date }}</h4>
 				<h5>ID: {{ bazaar.id }}</h5>
 			</v-col>
 		</v-row>
 		<v-row>
-			<v-col cols="12" sm="6">
-				<div class="bills">
-					<Bill
-						v-for="(id, index) in $store.getters.billIds"
-						:key="index"
-						:id="id"
-						@finish="addBill"
-						:highlighted="index === 0"
-					/>
-				</div>
+			<v-col cols="12" sm="6" class="bills">
+				<Bill
+					v-for="(id, index) in $store.getters.billIds"
+					:key="index"
+					:id="id"
+					@finish="addBill"
+					:highlighted="index === 0"
+				/>
 			</v-col>
 			<v-col cols="12" sm="6">
 				<Customers />

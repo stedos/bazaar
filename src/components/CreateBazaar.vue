@@ -35,11 +35,7 @@
 </template>
 
 <script>
-const bazarData = () => ({
-  id: '' + Math.floor(Math.random() * Math.pow(10, 6)),
-  date: new Date().toUTCString(),
-  name: "",
-});
+import { bazaarData } from '@/utils/utils.js';
 
 export default {
   name: "CreateBazaar",
@@ -48,13 +44,13 @@ export default {
   data() {
     return {
       dialog: false,
-      bazaar: bazarData(),
+      bazaar: bazaarData(),
     }
   },
   watch: {
     dialog() {
       if(this.dialog) {
-        this.bazaar = bazarData();
+        this.bazaar = bazaarData();
         setTimeout(() => this.$refs.name.focus(), 250);
       }
     }

@@ -9,7 +9,7 @@
 		<v-simple-table>
 			<thead>
 				<tr>
-					<th>Kundenr.</th>
+					<th>Nr.</th>
 					<th>Artikel</th>
 					<th>Brutto</th>
 					<th>Abzug {{reverseTax * 100}}%</th>
@@ -78,6 +78,9 @@ export default {
 	}
 	tr:last-child {
 		font-weight: bold;
+	}
+	th {
+		word-break: break-all;
 	}
 }
 </style>
