@@ -97,7 +97,7 @@ export default {
 		return {
 			current: cleanData(),
 			focused: false,
-			showInfo: true
+			showInfo: false,
 		};
 	},
 	computed: {

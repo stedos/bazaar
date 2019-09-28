@@ -1,14 +1,19 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersistence from 'vuex-persist';
+import localforage from 'localforage';
 
 Vue.use(Vuex);
 
-const STORAGE_BAZAARS = 'bazaars';
-const STORED_BAZAARS = JSON.parse(localStorage.getItem(STORAGE_BAZAARS));
-
 const store = new Vuex.Store({
+	plugins: [
+		new VuexPersistence({
+			storage: localforage,
+			reducer: (state) => ({bazaars: state.bazaars}),
+		}).plugin
+	],
 	state: {
-		bazaars: STORED_BAZAARS || {},
+		bazaars: {},
 		selected: null,
 	},
 	getters: {
@@ -120,8 +125,5 @@ const store = new Vuex.Store({
 		}
 	},
 });
-
-// save store automatically in storage
-store.watch(state => state.bazaars, bazaars => localStorage.setItem(STORAGE_BAZAARS, JSON.stringify(bazaars)));
 
 export default store;
