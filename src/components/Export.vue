@@ -1,7 +1,13 @@
 <template>
-  <v-btn text :href="href" :download="`Rechnung-${id}.json`" @click.stop>
+  <v-btn :text="showText" :icon="!showText" :href="href" :download="`Rechnung-${id}.json`" @click.stop>
     <span v-if="showText"  class="mr-2 d-none d-sm-flex">Download</span>
-    <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-download</v-icon>
+    <v-icon v-if="showText">mdi-download</v-icon>
+	<v-tooltip v-else bottom>
+		<template v-slot:activator="{ on }">
+			<v-icon v-on="on">mdi-download</v-icon>
+		</template>
+		<span v-if="!showText">Download</span>
+	</v-tooltip>
   </v-btn>
 </template>
 

@@ -11,13 +11,15 @@
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "core-js": "^2.6.5",
+    "localforage": "^1.7.3",
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
     "vue": "^2.6.10",
     "vue-html-to-paper": "^1.1.1",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persist": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",

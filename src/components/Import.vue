@@ -1,12 +1,18 @@
 <template>
   <div class="import">
     <input ref="upload" type="file" @change="loadTextFromFile" class="upload" accept="application/json">
-    <v-btn text @click="$refs.upload.click()">
+    <v-btn :text="showText" :icon="!showText" @click="$refs.upload.click()">
       <span v-if="showText" class="mr-2 d-none d-sm-flex">Importieren</span>
-      <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-upload</v-icon>
+      <v-icon v-if="showText">mdi-upload</v-icon>
+      <v-tooltip v-else bottom>
+          <template v-slot:activator="{ on }">
+            <v-icon v-on="on">mdi-upload</v-icon>
+          </template>
+          <span>Importieren</span>
+        </v-tooltip>
     </v-btn>
 
-    <v-dialog v-model="dialog.show" max-width="370">
+    <v-dialog v-model="dialog.show" max-width="600">
       <v-card>
         <v-card-title class="headline">
           Importieren
