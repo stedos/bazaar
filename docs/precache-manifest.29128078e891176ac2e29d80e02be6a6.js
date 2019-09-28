@@ -1,42 +1,42 @@
 self.__precacheManifest = [
   {
-    "revision": "4357beb823a5f8d65c260f045d9e019a",
-    "url": "/bazaar/fonts/Roboto-RegularItalic.4357beb8.woff2"
+    "revision": "13ec0eb5bdb821ff4930237d7c9f943f",
+    "url": "/bazaar/fonts/Roboto-MediumItalic.13ec0eb5.woff2"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/bazaar/robots.txt"
   },
   {
-    "revision": "13ec0eb5bdb821ff4930237d7c9f943f",
-    "url": "/bazaar/fonts/Roboto-MediumItalic.13ec0eb5.woff2"
+    "revision": "4357beb823a5f8d65c260f045d9e019a",
+    "url": "/bazaar/fonts/Roboto-RegularItalic.4357beb8.woff2"
   },
   {
-    "revision": "e89320768eb07b924c86",
-    "url": "/bazaar/js/app.5e9442d1.js"
+    "revision": "373ae2a60fd384da2e3e",
+    "url": "/bazaar/js/app.e0cda3c2.js"
   },
   {
-    "revision": "cbe477e6854dffac0b0a",
-    "url": "/bazaar/js/chunk-vendors.970cdcdd.js"
+    "revision": "1fb92a1095556b81ad15",
+    "url": "/bazaar/js/chunk-vendors.a3f4a016.js"
   },
   {
     "revision": "f75569f8a5fab0893fa712d8c0d9c3fe",
     "url": "/bazaar/fonts/Roboto-BlackItalic.f75569f8.woff2"
   },
   {
-    "revision": "ae20f092f09fbe4b8d03",
-    "url": "/bazaar/js/about.8ac98cc4.js"
+    "revision": "88e925da05a3e485d4f2",
+    "url": "/bazaar/js/about.9d69ec97.js"
   },
   {
-    "revision": "d3b47375afd904983d9be8d6e239a949",
-    "url": "/bazaar/fonts/Roboto-Thin.d3b47375.woff"
+    "revision": "c73eb1ceba3321a80a0aff13ad373cb4",
+    "url": "/bazaar/fonts/Roboto-Light.c73eb1ce.woff"
   },
   {
     "revision": "fc03f7f15facede623faa7666c7d1f5a",
     "url": "/bazaar/fonts/materialdesignicons-webfont.fc03f7f1.ttf"
   },
   {
-    "revision": "c06e048ad4c65d4885dca2c0ced2b9da",
+    "revision": "2891a8eb074c47c9bf7d8e32e3e9e10c",
     "url": "/bazaar/index.html"
   },
   {
@@ -44,16 +44,16 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/materialdesignicons-webfont.ff13d121.woff"
   },
   {
-    "revision": "c73eb1ceba3321a80a0aff13ad373cb4",
-    "url": "/bazaar/fonts/Roboto-Light.c73eb1ce.woff"
+    "revision": "d3b47375afd904983d9be8d6e239a949",
+    "url": "/bazaar/fonts/Roboto-Thin.d3b47375.woff"
   },
   {
     "revision": "c61b9c12f68ee1ba045a4b49dba29ca5",
     "url": "/bazaar/fonts/materialdesignicons-webfont.c61b9c12.woff2"
   },
   {
-    "revision": "50d75e48e0a3ddab1dd15d6bfb9d3700",
-    "url": "/bazaar/fonts/Roboto-Bold.50d75e48.woff"
+    "revision": "1d6594826615607f6dc860bb49258acb",
+    "url": "/bazaar/fonts/Roboto-Medium.1d659482.woff"
   },
   {
     "revision": "73f0a88bbca1bec19fb1303c689d04c6",
@@ -100,10 +100,6 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/Roboto-LightItalic.e8eaae90.woff2"
   },
   {
-    "revision": "1d6594826615607f6dc860bb49258acb",
-    "url": "/bazaar/fonts/Roboto-Medium.1d659482.woff"
-  },
-  {
     "revision": "83e114c316fcc3f23f524ec3e1c65984",
     "url": "/bazaar/fonts/Roboto-MediumItalic.83e114c3.woff"
   },
@@ -120,6 +116,10 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/Roboto-Bold.b52fac2b.woff2"
   },
   {
+    "revision": "50d75e48e0a3ddab1dd15d6bfb9d3700",
+    "url": "/bazaar/fonts/Roboto-Bold.50d75e48.woff"
+  },
+  {
     "revision": "cc2fadc3928f2f223418887111947b40",
     "url": "/bazaar/fonts/Roboto-BlackItalic.cc2fadc3.woff"
   },
@@ -132,11 +132,11 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/Roboto-Black.313a6563.woff"
   },
   {
-    "revision": "cbe477e6854dffac0b0a",
-    "url": "/bazaar/css/chunk-vendors.2a831ec9.css"
+    "revision": "1fb92a1095556b81ad15",
+    "url": "/bazaar/css/chunk-vendors.5f7f7a32.css"
   },
   {
-    "revision": "e89320768eb07b924c86",
-    "url": "/bazaar/css/app.247a2243.css"
+    "revision": "373ae2a60fd384da2e3e",
+    "url": "/bazaar/css/app.2c801d9c.css"
   }
 ];
