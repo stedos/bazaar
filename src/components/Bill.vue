@@ -109,19 +109,23 @@ export default {
 		},
 		refId() {
 			return `bill-${this.id}`;
-		}
+		},
+		hasCustomer() {
+			return !!this.current.customer.length;
+		},
+		hasPrice() {
+			return this.current.price && this.current.price >= 0;
+		},
 	},
 	methods: {
-		focus() {
-			console.log("focus");
-		},
 		addEntry() {
-			if (this.current.customer.length && this.current.price >= 0) {
+			if (this.hasCustomer && this.hasPrice) {
 				this.$store.commit("addEntryToBill", {
 					billId: this.id,
 					...this.current
 				});
-			} else {
+			}
+			else if(!this.hasCustomer && !this.hasPrice) {
 				this.finish();
 			}
 			this.$refs.customer.focus();
