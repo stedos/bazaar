@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/Roboto-MediumItalic.13ec0eb5.woff2"
   },
   {
-    "revision": "df8243de43f755140f72",
-    "url": "/bazaar/js/app.a4afc75d.js"
+    "revision": "fea1cb3a425c033c0420",
+    "url": "/bazaar/js/app.b4105226.js"
   },
   {
     "revision": "1fb92a1095556b81ad15",
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/materialdesignicons-webfont.c61b9c12.woff2"
   },
   {
-    "revision": "70af76fbb882b11bf9362c3d99e037b2",
+    "revision": "4e7b10e4a2e743ca6a900fc046824ffe",
     "url": "/bazaar/index.html"
   },
   {
@@ -56,8 +56,8 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/materialdesignicons-webfont.541e65fb.eot"
   },
   {
-    "revision": "50d75e48e0a3ddab1dd15d6bfb9d3700",
-    "url": "/bazaar/fonts/Roboto-Bold.50d75e48.woff"
+    "revision": "1d6594826615607f6dc860bb49258acb",
+    "url": "/bazaar/fonts/Roboto-Medium.1d659482.woff"
   },
   {
     "revision": "90d1676003d9c28c04994c18bfd8b558",
@@ -100,10 +100,6 @@ self.__precacheManifest = [
     "url": "/bazaar/fonts/Roboto-Light.d26871e8.woff2"
   },
   {
-    "revision": "1d6594826615607f6dc860bb49258acb",
-    "url": "/bazaar/fonts/Roboto-Medium.1d659482.woff"
-  },
-  {
     "revision": "e8eaae902c3a4dacb9a5062667e10576",
     "url": "/bazaar/fonts/Roboto-LightItalic.e8eaae90.woff2"
   },
@@ -118,6 +114,10 @@ self.__precacheManifest = [
   {
     "revision": "b52fac2bb93c5858f3f2675e4b52e1de",
     "url": "/bazaar/fonts/Roboto-Bold.b52fac2b.woff2"
+  },
+  {
+    "revision": "50d75e48e0a3ddab1dd15d6bfb9d3700",
+    "url": "/bazaar/fonts/Roboto-Bold.50d75e48.woff"
   },
   {
     "revision": "cc2fadc3928f2f223418887111947b40",
@@ -136,7 +136,7 @@ self.__precacheManifest = [
     "url": "/bazaar/css/chunk-vendors.5f7f7a32.css"
   },
   {
-    "revision": "df8243de43f755140f72",
-    "url": "/bazaar/css/app.2c801d9c.css"
+    "revision": "fea1cb3a425c033c0420",
+    "url": "/bazaar/css/app.45bb7c96.css"
   }
 ];
