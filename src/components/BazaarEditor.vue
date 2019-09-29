@@ -21,7 +21,7 @@
       <v-card-actions>
         <div class="flex-grow-1"></div>
         <v-btn color="red darken-1" text @click="dialog = false">Abbrechen</v-btn>
-        <v-btn color="green darken-1" text @click="finish">Fertig</v-btn>
+        <v-btn color="teal darken-1" text @click="finish">Fertig</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

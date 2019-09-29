@@ -17,7 +17,7 @@
 			<v-card-text>Dies kann nicht Rückgängig gemacht werden.</v-card-text>
 			<v-card-actions>
 				<div class="flex-grow-1"></div>
-				<v-btn color="green darken-1" text @click="dialog = false; $emit('keep')">Behalten!</v-btn>
+				<v-btn color="teal darken-1" text @click="dialog = false; $emit('keep')">Behalten!</v-btn>
 				<v-btn color="red darken-1" text @click="dialog = false; $emit('delete'); $emit">Löschen!</v-btn>
 			</v-card-actions>
 		</v-card>

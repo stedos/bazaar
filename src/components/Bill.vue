@@ -26,7 +26,7 @@
 				<tr v-for="(entry, entryId) in entries" :key="entryId">
 					<td>{{ entry.customer }}</td>
 					<td>{{ entry.price.toFixed(2) }}&nbsp;&euro;</td>
-					<td @click="deleteEntry(entryId)">
+					<td @click.stop="deleteEntry(entryId, entry)">
 						<v-icon>mdi-close-circle</v-icon>
 					</td>
 				</tr>
@@ -71,6 +71,12 @@
 			class="bill__info"
 			v-if="highlighted && showInfo"
 		>Doppelt Enter ohne Eingabe einer Kundennr. und eines Preises schließt die aktuelle Rechnung ab und erstellt automatisch eine neue Rechnung.</span>
+		
+		<v-snackbar v-model="deletedEntry.visible" :timeout="10000" bottom right>
+			Eintrag wurde gelöscht (Kunde {{ deletedEntry.entry.customer }}; Betrag {{ deletedEntry.entry.price }}&nbsp;&euro;)
+			<v-btn color="red" text @click="resetEntry">Rückgängig</v-btn>
+			<v-btn color="teal" text @click="deletedEntry.visible = false">Schließen</v-btn>
+		</v-snackbar>
 	</v-card>
 </template>
 
@@ -97,6 +103,10 @@ export default {
 		return {
 			current: cleanData(),
 			showInfo: false,
+			deletedEntry: {
+				visible: false,
+				entry: {},
+			},
 		};
 	},
 	computed: {
@@ -137,7 +147,17 @@ export default {
 			}
 			
 		},
-		deleteEntry(entryId) {
+		resetEntry() {
+			this.$store.commit("addEntryToBill", {
+				billId: this.id,
+				...this.deletedEntry.entry
+			});
+			this.deletedEntry.visible = false;
+		},
+		deleteEntry(entryId, entry) {
+			console.log('entry?', entry);
+			this.deletedEntry.visible = true;
+			this.deletedEntry.entry = entry;
 			this.$store.commit("deleteEntryFromBill", {
 				billId: this.id,
 				entryId: entryId
