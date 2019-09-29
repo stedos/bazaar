@@ -7,6 +7,7 @@
           <th>Name</th>
           <th>Date</th>
           <th>ID</th>
+          <th>Rechnungen</th>
           <th>Aktionen</th>
         </tr>
       </thead>
@@ -15,6 +16,7 @@
           <td>{{ bazaar.name }}</td>
           <td>{{ bazaar.date }}</td>
           <td>{{ bazaar.id }}</td>
+          <td>{{ Object.keys(bazaar.bills).length }}</td>
           <td>
             <EditBazaar :bazaar="bazaar" />
             <Merge :preselection="bazaar.id" />
