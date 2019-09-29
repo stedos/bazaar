@@ -18,7 +18,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12" md="12">
-              <v-text-field label="Name" required v-model="name" ref="name" color="teal"></v-text-field>
+              <v-text-field label="Name" required v-model="name" ref="name"></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-combobox
@@ -27,8 +27,6 @@
                 label="Wähle alle Basars die zusammengeführt werden sollen"
                 multiple
                 chips
-                color="teal"
-                item-color="teal"
                 :small-chips="true"
                 :deletable-chips="true"
                 autofocus
@@ -41,7 +39,7 @@
       <v-card-actions>
         <div class="flex-grow-1"></div>
         <v-btn color="red darken-1" text @click="dialog = false">Schließen</v-btn>
-        <v-btn color="teal darken-1" text @click="create">Erstellen</v-btn>
+        <v-btn color="primary" text @click="create">Erstellen</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

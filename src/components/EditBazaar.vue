@@ -1,7 +1,12 @@
 <template>
   <BazaarEditor headline="Basar verändern" :name="bazaar.name" @finish="rename">
     <v-btn icon>
-      <v-icon>mdi-square-edit-outline</v-icon>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">mdi-square-edit-outline</v-icon>
+        </template>
+        <span>Umbennen</span>
+      </v-tooltip>
     </v-btn>
   </BazaarEditor>
 </template>

@@ -75,7 +75,7 @@
 		<v-snackbar v-model="deletedEntry.visible" :timeout="10000" bottom right>
 			Eintrag wurde gelöscht (Kunde {{ deletedEntry.entry.customer }}; Betrag {{ deletedEntry.entry.price }}&nbsp;&euro;)
 			<v-btn color="red" text @click="resetEntry">Rückgängig</v-btn>
-			<v-btn color="teal" text @click="deletedEntry.visible = false">Schließen</v-btn>
+			<v-btn color="primary" text @click="deletedEntry.visible = false">Schließen</v-btn>
 		</v-snackbar>
 	</v-card>
 </template>

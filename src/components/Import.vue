@@ -5,11 +5,11 @@
       <span v-if="showText" class="mr-2 d-none d-sm-flex">Importieren</span>
       <v-icon v-if="showText">mdi-upload</v-icon>
       <v-tooltip v-else bottom>
-          <template v-slot:activator="{ on }">
-            <v-icon v-on="on">mdi-upload</v-icon>
-          </template>
-          <span>Importieren</span>
-        </v-tooltip>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">mdi-upload</v-icon>
+        </template>
+        <span>Importieren</span>
+      </v-tooltip>
     </v-btn>
 
     <v-dialog v-model="dialog.show" max-width="600">

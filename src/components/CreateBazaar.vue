@@ -1,6 +1,6 @@
 <template>
   <BazaarEditor headline="Basar erstellen" @finish="create">
-    <v-btn color="teal">
+    <v-btn color="primary">
       <span class="d-none d-sm-flex">Neuen Basar erstellen</span>
       <v-icon :right="$vuetify.breakpoint.smAndUp">mdi-shopping</v-icon>
     </v-btn>
