@@ -21,20 +21,17 @@
               <v-text-field label="Name" required v-model="name" ref="name"></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-select
-                v-model="selected1"
+              <v-combobox
+                v-model="selected"
                 :items="bazaars"
-                menu-props="auto"
-                label="Basar 1"
-              ></v-select>
+                label="Wähle alle Basars die zusammengeführt werden sollen"
+                multiple
+                chips
+                :small-chips="true"
+                :deletable-chips="true"
+                autofocus
+              ></v-combobox>
             </v-col>
-            <v-col cols="12">
-              <v-select
-                v-model="selected2"
-                :items="bazaars"
-                menu-props="auto"
-                label="Basar 2"
-              ></v-select>
             </v-col>
           </v-row>
         </v-container>
@@ -42,7 +39,7 @@
       <v-card-actions>
         <div class="flex-grow-1"></div>
         <v-btn color="red darken-1" text @click="dialog = false">Schließen</v-btn>
-        <v-btn color="green darken-1" text @click="create">Erstellen</v-btn>
+        <v-btn color="primary" text @click="create">Erstellen</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -58,19 +55,18 @@ export default {
     return {
       dialog: false,
       bazaars: [],
-      name: '',
-      selected1: null,
-      selected2: null,
+      selected: [],
+      name: 'Zusammengeführte Basars',
     }
   },
   watch: {
     dialog() {
       if(this.dialog) {
-        this.selected1 = this.preselection;
         this.bazaars = this.$store.getters.bazaarsAsList.map(b => ({
           text: `${b.name} - ${b.date} (${b.id})`,
           value: b.id,
         }));
+        this.selected = this.bazaars.filter(b => b.value === this.preselection);
         setTimeout(() => this.$refs.name.focus(), 250);
       }
     }
@@ -79,7 +75,7 @@ export default {
     create() {
       this.$store.dispatch('merge', {
         name: this.name,
-        bazaars: [this.selected1, this.selected2]
+        bazaars: this.selected.map(b => b.value)
       });
       
       this.dialog = false;

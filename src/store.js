@@ -29,6 +29,7 @@ const store = new Vuex.Store({
 		billIds: (_, getters) => Object.keys(getters.bazaar.bills),
 		getBillById: (_, getters) => billId => getters.bazaar.bills[billId],
 		sum: (_, getters) => Object.values(getters.bazaar.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
+		amount: (_, getters) => Object.values(getters.bazaar.bills).flat().length,
 		customers: (_, getters) => {
 			const customerMap = Object.values(getters.bazaar.bills).flat()
 				.reduce((acc, cur) => ({
@@ -120,7 +121,7 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		create({commit}, name) {
-			const bazaar = { ...bazaarData, name };
+			const bazaar = { ...bazaarData(), name };
 			
 			commit('createBazaar', bazaar);
 

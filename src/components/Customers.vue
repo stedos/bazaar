@@ -25,7 +25,8 @@
 					<td>{{ clean(customer.price, tax) }}&nbsp;&euro;</td>
 				</tr>
 				<tr>
-					<td colspan="2">SUMME</td>
+					<td>SUMME</td>
+					<td>{{ amountSum }}</td>
 					<td>{{ clean(sum) }}&nbsp;&euro;</td>
 					<td>{{ clean(sum, reverseTax) }}&nbsp;&euro;</td>
 					<td>{{ clean(sum, tax) }}&nbsp;&euro;</td>
@@ -58,6 +59,9 @@ export default {
 		},
 		sum() {
 			return this.$store.getters.sum;
+		},
+		amountSum() {
+			return this.$store.getters.amount;
 		}
 	},
 	methods: {

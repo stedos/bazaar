@@ -15,7 +15,7 @@ import Bazaars from "@/components/Bazaars.vue";
 export default {
   name: "home",
   components: {
-    Bazaars
+    Bazaars,
   },
   mounted() {
     this.$store.commit('selectBazaar', null);
