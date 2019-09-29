@@ -7,12 +7,6 @@ import { bazaarData } from '@/utils/utils.js';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-	plugins: [
-		new VuexPersistence({
-			storage: localforage,
-			reducer: (state) => ({bazaars: state.bazaars}),
-		}).plugin
-	],
 	state: {
 		bazaars: {},
 		selected: null,
@@ -137,6 +131,12 @@ const store = new Vuex.Store({
 			});
 		}
 	},
+	plugins: [
+		new VuexPersistence({
+			storage: localforage,
+			reducer: (state) => ({bazaars: state.bazaars}),
+		}).plugin
+	],
 });
 
 export default store;
