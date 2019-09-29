@@ -5,7 +5,7 @@
 		class="bill"
 		:id="refId"
 		@click="$refs.customer.focus()"
-		:style="highlighted || focused ? '' : 'opacity: 0.5;'"
+		:style="highlighted ? '' : 'opacity: 0.5;'"
 	>
 		<div class="chart-naming">
 			<h3>Rechnung {{ id }}</h3>
@@ -23,7 +23,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(entry, entryId) in bill" :key="entryId">
+				<tr v-for="(entry, entryId) in entries" :key="entryId">
 					<td>{{ entry.customer }}</td>
 					<td>{{ entry.price.toFixed(2) }}&nbsp;&euro;</td>
 					<td @click="deleteEntry(entryId)">
@@ -43,9 +43,9 @@
 							ref="customer"
 							label="Kundenr."
 							v-model="current.customer"
-							@focus="focused = true"
-							@blur="focused = false"
+							@focus="$emit('select', id)"
 							@keyup.enter="$refs.price.focus()"
+							@click.stop
 						/>
 					</td>
 					<td>
@@ -55,9 +55,9 @@
 							label="Preis"
 							type="number"
 							v-model.number="current.price"
-							@focus="focused = true"
-							@blur="focused = false"
+							@focus="$emit('select', id)"
 							@keyup.enter="addEntry"
+							@click.stop
 						/>
 					</td>
 					<td>
@@ -91,21 +91,20 @@ export default {
 	},
 	props: {
 		id: String,
-		highlighted: Boolean
+		highlighted: Boolean,
 	},
 	data() {
 		return {
 			current: cleanData(),
-			focused: false,
 			showInfo: false,
 		};
 	},
 	computed: {
-		bill() {
+		entries() {
 			return this.$store.getters.getBillById(this.id);
 		},
 		sum() {
-			return this.bill.reduce((acc, cur) => acc + cur.price, 0);
+			return this.entries.reduce((acc, cur) => acc + cur.price, 0);
 		},
 		refId() {
 			return `bill-${this.id}`;
@@ -117,6 +116,9 @@ export default {
 			return this.current.price && this.current.price >= 0;
 		},
 	},
+	mounted() {
+		this.$refs.customer.focus();
+	},
 	methods: {
 		addEntry() {
 			if (this.hasCustomer && this.hasPrice) {
@@ -124,12 +126,16 @@ export default {
 					billId: this.id,
 					...this.current
 				});
+				this.current = cleanData();
+				this.$refs.customer.focus();
 			}
 			else if(!this.hasCustomer && !this.hasPrice) {
-				this.finish();
+				this.$emit("finish")
 			}
-			this.$refs.customer.focus();
-			this.reset();
+			else if(!this.hasCustomer) {
+				this.$refs.customer.focus();
+			}
+			
 		},
 		deleteEntry(entryId) {
 			this.$store.commit("deleteEntryFromBill", {
@@ -142,12 +148,6 @@ export default {
 				billId: this.id
 			});
 		},
-		reset() {
-			this.current = cleanData();
-		},
-		finish() {
-			this.$emit("finish");
-		}
 	}
 };
 </script>
