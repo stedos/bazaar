@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/bazaar/precache-manifest.a23d758fc894514e3ff40c820d21c863.js"
+  "/bazaar/precache-manifest.4dd5a8f7b9466cce82f08fd7415603c2.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "bazaar"});
