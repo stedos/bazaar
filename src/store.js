@@ -26,7 +26,7 @@ const store = new Vuex.Store({
 		bazaarsAsList: state => Object.values(state.bazaars).sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
 
 		// bills (single bazaar)
-		billIds: (_, getters) => Object.keys(getters.bazaar.bills).reverse(),
+		billIds: (_, getters) => Object.keys(getters.bazaar.bills),
 		getBillById: (_, getters) => billId => getters.bazaar.bills[billId],
 		sum: (_, getters) => Object.values(getters.bazaar.bills).flat().reduce((acc, cur) => acc + cur.price, 0),
 		customers: (_, getters) => {

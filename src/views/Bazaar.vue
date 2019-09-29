@@ -12,11 +12,12 @@
 		<v-row>
 			<v-col cols="12" sm="6" class="bills">
 				<Bill
-					v-for="(id, index) in $store.getters.billIds"
+					v-for="(id, index) in bills"
 					:key="index"
 					:id="id"
 					@finish="addBill"
-					:highlighted="index === 0"
+					@select="id => selected = id"
+					:highlighted="index === bills.length - 1 || selected === id"
 				/>
 			</v-col>
 			<v-col cols="12" sm="6">
@@ -36,15 +37,23 @@ export default {
 		Bill,
 		Customers
 	},
+	data() {
+		return {
+			selected: null,
+		}
+	},
 	computed: {
 		bazaar() {
 			return this.$store.getters.bazaar;
-		}
+		},
+		bills() {
+			return this.$store.getters.billIds;
+		},
 	},
 	mounted() {
 		this.$store.commit("selectBazaar", this.$route.params.id);
 
-		if (!this.$store.getters.billIds.length) {
+		if (!this.bills.length) {
 			this.addBill(this.$route.params.id);
 		}
 	},
@@ -57,6 +66,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.bills {
+	display: flex;
+    flex-direction: column-reverse;
+}
 .name-info {
 	text-align: right;
 }
