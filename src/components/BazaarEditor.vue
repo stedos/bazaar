@@ -13,14 +13,22 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12" md="12">
-              <v-text-field label="Name" required v-model="value" ref="name" @keyup.enter="finish"></v-text-field>
+              <v-text-field
+                label="Name"
+                required
+                v-model="value"
+                ref="name"
+                @keyup.enter="finish"
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
-        <v-btn color="red darken-1" text @click="dialog = false">Abbrechen</v-btn>
+        <v-btn color="red darken-1" text @click="dialog = false"
+          >Abbrechen</v-btn
+        >
         <v-btn color="primary" text @click="finish">Fertig</v-btn>
       </v-card-actions>
     </v-card>
@@ -32,17 +40,17 @@ export default {
   name: "BazaarEditor",
   props: {
     headline: String,
-    name: String,
+    name: String
   },
   data() {
     return {
       dialog: false,
-      value: '',
-    }
+      value: ""
+    };
   },
   watch: {
     dialog() {
-      if(this.dialog) {
+      if (this.dialog) {
         this.value = this.name;
         setTimeout(() => this.$refs.name.focus(), 350);
       }
@@ -51,9 +59,8 @@ export default {
   methods: {
     finish() {
       this.dialog = false;
-      this.$emit('finish', this.value);
-    },
+      this.$emit("finish", this.value);
+    }
   }
-
 };
 </script>

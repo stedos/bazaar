@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Bazaar from "./views/Bazaar.vue";
-import store from '@/store'
+import store from "@/store";
 
 Vue.use(Router);
 
@@ -31,8 +31,8 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
-  await store.restored
-  next()
+  await store.restored;
+  next();
 });
 
 export default router;

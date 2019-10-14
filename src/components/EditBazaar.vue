@@ -20,13 +20,12 @@ export default {
     BazaarEditor
   },
   props: {
-    bazaar: Object,
+    bazaar: Object
   },
   methods: {
     rename(name) {
-      this.$store.commit('editBazaar', { bazaarId: this.bazaar.id, name });
-    },
+      this.$store.commit("editBazaar", { bazaarId: this.bazaar.id, name });
+    }
   }
-
 };
 </script>
