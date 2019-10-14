@@ -12,7 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="bazaar in $store.getters.bazaarsAsList" :key="bazaar.id" @click.stop="$router.push(`/bazaar/${bazaar.id}`)">
+        <tr
+          v-for="bazaar in $store.getters.bazaarsAsList"
+          :key="bazaar.id"
+          @click.stop="$router.push(`/bazaar/${bazaar.id}`)"
+        >
           <td>{{ bazaar.name }}</td>
           <td>{{ bazaar.date }}</td>
           <td>{{ bazaar.id }}</td>
@@ -21,7 +25,12 @@
             <EditBazaar :bazaar="bazaar" />
             <Merge :preselection="bazaar.id" />
             <Export :id="bazaar.id" />
-            <Delete :headline="`Basar '${bazaar.name}' [ID: ${bazaar.id}] wirklich löschen?`" @delete="deleteEntry(bazaar.id)" />
+            <Delete
+              :headline="
+                `Basar '${bazaar.name}' [ID: ${bazaar.id}] wirklich löschen?`
+              "
+              @delete="deleteEntry(bazaar.id)"
+            />
           </td>
         </tr>
       </tbody>
@@ -41,21 +50,17 @@ export default {
     Delete,
     Export,
     Merge,
-    EditBazaar,
+    EditBazaar
   },
-  props: {
-  },
+  props: {},
   data() {
-    return {
-    }
+    return {};
   },
-  mounted() {
-  },
-  computed: {
-  },
+  mounted() {},
+  computed: {},
   methods: {
     deleteEntry(id) {
-      this.$store.commit('deleteBazaar', id);
+      this.$store.commit("deleteBazaar", id);
     }
   }
 };

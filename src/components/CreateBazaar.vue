@@ -17,11 +17,10 @@ export default {
   },
   methods: {
     create(name) {
-      this.$store.dispatch('create', name).then(({ id }) => {
+      this.$store.dispatch("create", name).then(({ id }) => {
         this.$router.push(`/bazaar/${id}`);
       });
-    },
+    }
   }
-
 };
 </script>

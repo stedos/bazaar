@@ -1,6 +1,12 @@
 <template>
   <div class="import">
-    <input ref="upload" type="file" @change="loadTextFromFile" class="upload" accept="application/json">
+    <input
+      ref="upload"
+      type="file"
+      @change="loadTextFromFile"
+      class="upload"
+      accept="application/json"
+    />
     <v-btn :text="showText" :icon="!showText" @click="$refs.upload.click()">
       <span v-if="showText" class="mr-2 d-none d-sm-flex">Importieren</span>
       <v-icon v-if="showText">mdi-upload</v-icon>
@@ -16,11 +22,21 @@
       <v-card>
         <v-card-title class="headline">
           Importieren
-          <template v-if="dialog.error">&nbsp;fehlgeschlagen</template>
-          <template v-else>&nbsp;erfolgreich</template>
+          <template v-if="dialog.error"
+            >&nbsp;fehlgeschlagen</template
+          >
+          <template v-else
+            >&nbsp;erfolgreich</template
+          >
         </v-card-title>
-        <v-card-text v-if="dialog.error">Leider ist ein Fehler aufgetreten. Bitte laden Sie die Datei erneut herunter und versuchen Sie diese einzufügen.</v-card-text>
-        <v-card-text v-else>Rechnungen '{{ dialog.name }}' wurden erfolgreich mit der ID {{ dialog.id }} importiert.</v-card-text>
+        <v-card-text v-if="dialog.error"
+          >Leider ist ein Fehler aufgetreten. Bitte laden Sie die Datei erneut
+          herunter und versuchen Sie diese einzufügen.</v-card-text
+        >
+        <v-card-text v-else
+          >Rechnungen '{{ dialog.name }}' wurden erfolgreich mit der ID
+          {{ dialog.id }} importiert.</v-card-text
+        >
         <v-card-actions>
           <div class="flex-grow-1"></div>
           <v-btn text @click="closeDialog()">Okay!</v-btn>
@@ -37,16 +53,16 @@ const dialogDefault = () => ({
   show: false,
   error: false,
   id: 0,
-  name: '',
+  name: ""
 });
 
 export default {
-  name: 'Import',
+  name: "Import",
   props: {
-    showText: Boolean,
+    showText: Boolean
   },
   data: () => ({
-    dialog: dialogDefault(),
+    dialog: dialogDefault()
   }),
   methods: {
     loadTextFromFile(ev) {
@@ -60,21 +76,20 @@ export default {
           const bazaar = JSON.parse(e.target.result);
           const originalId = bazaar.id;
           let count = 1;
-          
-          while(this.$store.getters.hasBazaar(bazaar.id)) {
+
+          while (this.$store.getters.hasBazaar(bazaar.id)) {
             bazaar.id = `${originalId} (${count++})`;
           }
-          
+
           this.dialog.id = bazaar.id;
           this.dialog.name = bazaar.name;
-          this.$store.commit('createBazaar', bazaar);
-
+          this.$store.commit("createBazaar", bazaar);
         } catch (error) {
-          console.log('error', error);
+          console.log("error", error);
           this.dialog.error = true;
         }
 
-        this.$refs.upload.value = '';
+        this.$refs.upload.value = "";
       };
 
       reader.readAsText(file);
@@ -91,12 +106,12 @@ export default {
   position: relative;
 }
 .upload {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
 }
 </style>

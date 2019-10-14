@@ -45,25 +45,19 @@ export default {
   components: {
     InfoBox
   },
-  props: {
-  },
+  props: {},
   data() {
     return {
       activeBtn: 1,
       showNav: true,
-      showInfobox: false,
-    }
+      showInfobox: false
+    };
   },
-  mounted() {
-  },
-  computed: {
-  },
-  methods: {
-  }
+  mounted() {},
+  computed: {},
+  methods: {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

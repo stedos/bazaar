@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: "CreateBill",
+  name: "CreateBill"
 };
 </script>
