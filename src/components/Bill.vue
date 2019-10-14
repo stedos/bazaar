@@ -28,24 +28,31 @@
       <tbody>
         <tr v-for="(entry, entryId) in entries" :key="entryId">
           <td>
-            <input
+            <v-text-field
+              :flat="true"
+              :solo="true"
+              :hide-details="true"
               :value="entry.customer"
               @change="
-                ev => adaptEntryCustomer(entryId, ev.target.value, entry.price)
+                customer => adaptEntryCustomer(entryId, customer, entry.price)
               "
               @click.stop
             />
           </td>
           <td>
-            <input
+            <v-text-field
+              :flat="true"
+              :solo="true"
+              :hide-details="true"
               type="number"
               :value="entry.price.toFixed(2)"
               @change="
-                ev =>
-                  adaptEntryCustomer(entryId, entry.customer, +ev.target.value)
+                price =>
+                  adaptEntryCustomer(entryId, entry.customer, +price)
               "
+              suffix="€"
               @click.stop
-            />&nbsp;&euro;
+            />
           </td>
           <td @click.stop="deleteEntry(entryId, entry)">
             <v-icon>mdi-close-circle</v-icon>

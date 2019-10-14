@@ -18,7 +18,12 @@
         <v-container>
           <v-row>
             <v-col cols="12" sm="12" md="12">
-              <v-text-field label="Name" required v-model="name" ref="name"></v-text-field>
+              <v-text-field
+                label="Name"
+                required
+                v-model="name"
+                ref="name"
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-combobox
@@ -32,13 +37,14 @@
                 autofocus
               ></v-combobox>
             </v-col>
-            </v-col>
           </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
         <div class="flex-grow-1"></div>
-        <v-btn color="red darken-1" text @click="dialog = false">Schließen</v-btn>
+        <v-btn color="red darken-1" text @click="dialog = false"
+          >Schließen</v-btn
+        >
         <v-btn color="primary" text @click="create">Erstellen</v-btn>
       </v-card-actions>
     </v-card>
@@ -49,22 +55,22 @@
 export default {
   name: "Merge",
   props: {
-    preselection: String,
+    preselection: String
   },
   data() {
     return {
       dialog: false,
       bazaars: [],
       selected: [],
-      name: 'Zusammengeführte Basars',
-    }
+      name: "Zusammengeführte Basars"
+    };
   },
   watch: {
     dialog() {
-      if(this.dialog) {
+      if (this.dialog) {
         this.bazaars = this.$store.getters.bazaarsAsList.map(b => ({
           text: `${b.name} - ${b.date} (${b.id})`,
-          value: b.id,
+          value: b.id
         }));
         this.selected = this.bazaars.filter(b => b.value === this.preselection);
         setTimeout(() => this.$refs.name.focus(), 250);
@@ -73,14 +79,13 @@ export default {
   },
   methods: {
     create() {
-      this.$store.dispatch('merge', {
+      this.$store.dispatch("merge", {
         name: this.name,
         bazaars: this.selected.map(b => b.value)
       });
-      
-      this.dialog = false;
-    },
-  }
 
+      this.dialog = false;
+    }
+  }
 };
 </script>
