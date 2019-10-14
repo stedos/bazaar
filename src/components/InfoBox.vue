@@ -44,7 +44,9 @@ export default {
     event: "event"
   },
   props: {
-    overlay: true,
+    overlay: {
+      default: true
+    }
   },
   data() {
     return {};

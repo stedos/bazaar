@@ -44,8 +44,8 @@ const store = new Vuex.Store({
             ...acc,
             [cur.customer]: acc[cur.customer]
               ? {
-                price: acc[cur.customer].price + cur.price,
-                  amount: ++acc[cur.customer].amount
+                amount: ++acc[cur.customer].amount,
+                price: acc[cur.customer].price + cur.price
               }
               : { price: cur.price, amount: 1 }
           }),

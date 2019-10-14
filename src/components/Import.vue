@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import Vue from "vue";
-
 const dialogDefault = () => ({
   show: false,
   error: false,
@@ -85,7 +83,7 @@ export default {
           this.dialog.name = bazaar.name;
           this.$store.commit("createBazaar", bazaar);
         } catch (error) {
-          console.log("error", error);
+          console.log("error", error); // eslint-disable-line
           this.dialog.error = true;
         }
 
