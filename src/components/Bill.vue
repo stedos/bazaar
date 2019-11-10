@@ -47,8 +47,7 @@
               type="number"
               :value="entry.price.toFixed(2)"
               @change="
-                price =>
-                  adaptEntryCustomer(entryId, entry.customer, +price)
+                price => adaptEntryCustomer(entryId, entry.customer, +price)
               "
               suffix="€"
               @click.stop

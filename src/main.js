@@ -8,9 +8,7 @@ import "./registerServiceWorker";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 
-import VueHtmlToPaper from "vue-html-to-paper";
-
-Vue.use(VueHtmlToPaper);
+import "array-flat-polyfill";
 
 Vue.config.productionTip = false;
 
