@@ -53,7 +53,7 @@
       "@vue/prettier"
     ],
     "ignorePattern": [
-      "docs/**"
+      "docs/**/*"
     ],
     "rules": {
       "indent": [
