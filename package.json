@@ -5,10 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-offline": "vue-cli-service build --mode offline",
     "lint": "vue-cli-service lint",
     "deploy": "git checkout master && git pull && git merge develop master && rm -rf docs && npm i && npm run build && mv dist docs && git add docs && git commit -m\"deploy\" && git push && git checkout -",
-    "offline": "git checkout offline && git pull && git merge develop offline && rm -rf offline && npm i && npm run build-offline && mv dist offline && git add offline && git commit -m\"deploy\" && git push && git checkout -"
+    "offline": "git checkout offline && git pull && git merge develop offline && rm -rf offline && npm i && npm run build && mv dist offline && git add offline && git commit -m\"deploy\" && git push && git checkout -"
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
