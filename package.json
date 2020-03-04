@@ -52,6 +52,9 @@
       "plugin:vue/essential",
       "@vue/prettier"
     ],
+    "ignorePattern": [
+      "docs/**"
+    ],
     "rules": {
       "indent": [
         "warn",
