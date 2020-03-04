@@ -58,9 +58,7 @@ const store = new Vuex.Store({
           price: customerMap[customer].price,
           amount: customerMap[customer].amount
         }))
-        .sort((a, b) =>
-          a.id.localeCompare(b.id, undefined, { numberic: true })
-        );
+        .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
     }
   },
   mutations: {

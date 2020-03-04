@@ -55,9 +55,7 @@ export default {
       return -(100 - this.tax * 100) / 100;
     },
     customers() {
-      return [...this.$store.getters.customers].sort((c1, c2) =>
-        c1.id.localeCompare(c2.id)
-      );
+      return this.$store.getters.customers;
     },
     sum() {
       return this.$store.getters.sum;
